@@ -22,7 +22,34 @@ def intersecao_esfera(O, D, S, R):
     # Bem parecido com o do plano, mas para esfera é um pouco mais simples porque da pra saber se há intersecao baseado no raio
     # Retorna a distancia do Objeto O ate a intersecao do raio (Objeto, Direcao) com a esfera (Esfera S, Raio), ou mais infinito se nao ha intersecao
     # Objeto e Esfera S sao pontos 3D, Direcao eh um vetor normalizado, Raio R é um escalar
-
+    # https://stackoverflow.com/questions/13783330/ray-tracing-cone-the-discriminant-gives-ve-values-so-no-intersections
+    # a = raio * raio
+    # Precisa usar o dot porque sao vetores
+    a = np.dot(D, D)
+    # Diferenca do objeto - esfera
+    OS = O - S
+    # b = raio * diferenca 
+    b = 2 * np.dot(D, OS)
+    # c = diferenca * diferenca - raio * raio
+    c = np.dot(OS, OS) - R * R
+    # Calcula o discriminante (La do Bhaskara)
+    discriminante = b * b - 4 * a * c
+    if discriminante > 0:
+        raizdiscriminante = np.sqrt(discriminante)
+        if b < 0:
+            q = (-b - raizdiscriminante) / 2
+        else:
+            q = (-b + raizdiscriminante) / 2
+        t0 = q / a
+        t1 = c / a
+        t0 = min(t0, t1)
+        t1 = max(t0, t1)
+        if t1 >= 0:
+            if t0 < 0:
+                return t1
+            else:
+                return t0
+    return np.inf
 
 def tracar_raio(rayO, rayD):
   # Encontra o primeiro ponto de interesao com a cena
