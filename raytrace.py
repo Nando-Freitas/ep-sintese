@@ -51,6 +51,18 @@ def intersecao_esfera(O, D, S, R):
                 return t0
     return np.inf
 
+def intersecao(O, D, obj):
+    # Precisa definir se a intersecao eh com plano ou com esfera
+
+
+def get_normal(obj, ponto_intersec):
+    # Precisa calcular a normal que varia de acordo com esfera ou plano
+    
+
+def get_color(obj, ponto_intersec):
+    # Retorna a cor que vai ser definida pelo usuario, provavalmente usando RGB
+
+
 def tracar_raio(rayO, rayD):
   # Encontra o primeiro ponto de interesao com a cena
   # Retorna None se o raio nao intercepta nenhum objeto
@@ -59,3 +71,13 @@ def tracar_raio(rayO, rayD):
   # Encontra as propriedades do objeto
   # Define se o objeto tem ou nao sombra
   # Entao precisa computar cor, shading (difusao) e a parte especular com Phong, provavelmente.
+
+
+def add_esfera(posicao, raio, cor):
+    # precisa retornar o dict da esfera
+
+
+def add_plane(posicao, normal):
+    # precisa retornar o dict do plano
+
+
