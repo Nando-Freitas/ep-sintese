@@ -115,9 +115,22 @@ def tracar_raio(raioO, raioD):
 def add_esfera(posicao, raio, cor):
     # precisa retornar o dict da esfera
     return dict(type='esfera', position=np.array(posicao), 
-        radius=np.array(raio), color=np.array(cor), reflection=.5)
+        raio=np.array(raio), cor=np.array(cor), reflexao=.5)
 
 def add_plane(posicao, normal):
     # precisa retornar o dict do plano
+    return dict(type='plano', position=np.array(posicao), 
+        normal=np.array(normal),
+        cor=lambda ponto_intersecao: (cor0_plano 
+            if (int(ponto_intersecao[0] * 2) % 2) == (int(ponto_intersecao[2] * 2) % 2) else cor1_plano),
+        especular_c=.5, reflexao=.25)
 
+# Lista de objetos
+cor0_plano = 1. * np.ones(3)
+cor1_plano = 0. * np.ones(3)
+cena = [add_esfera([.0, .1, 1.], .6, [0., 0., 1.]),
+         add_esfera([-.75, .1, 2.25], .6, [.5, .223, .5]),
+         add_esfera([-1.5, .1, 3.5], .6, [1., .572, .184]),
+         add_plano([0., -.5, 0.], [0., 1., 0.]),
+    ]
 
