@@ -138,3 +138,20 @@ cena = [add_esfera([.0, .1, 1.], .6, [0., 0., 1.]),
 luz = np.array([5., 5., -10.])
 cor_luz = np.ones(3)
 
+# Definicao de propriedades
+ambiente = .05
+especular_c = 1.0
+especular_k = 50
+
+altura = 400
+largura = 400
+
+profundidade_max = 5
+col = np.zeros(3)
+observador = np.array([0., 0.35, -1.])
+direcao_observador = np.array([0., 0., 0.])
+img = np.zeros((altura, largura, 3))
+
+proporcao = float(largura) / altura
+coordenadas_tela = (-1., -1. / proporcao + .25, 1., 1. / r + .25)
+
