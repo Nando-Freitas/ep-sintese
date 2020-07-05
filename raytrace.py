@@ -117,10 +117,20 @@ def add_plano(position, normal):
 color_plane0 = 1. * np.ones(3)
 color_plane1 = 1. * np.ones(3)
 scene = [add_esfera([.0, .1, 1.], .2, [0., 0., 1.]),
-         add_esfera([-.75, .1, 2.25], .4, [.5, .223, .5]),
-         add_esfera([-1.5, .1, 1.], .6, [1., .572, .184]),
-         add_esfera([0.75, .1, 1.], .8, [0.5, .863, .184]),
-         add_esfera([1.5, 3, 3.], 1.0, [0.321, 0., .864]),
+         add_esfera([-.75, .5, 1.], .5, [.5, .223, .5]),
+         add_esfera([-1.5, 1.1, 1.], .2, [1., .572, .184]),
+         add_esfera([0.75, 1.9, 1.], .5, [0.5, .863, .184]),
+         add_esfera([1.5, .1, 1.], .1, [0.321, 0., .864]),
+         add_esfera([.0, .1, 0.5], .4, [0., 0., 1.]),
+         add_esfera([-.75, .7, 0.5], .2, [.5, .223, .5]),
+         add_esfera([-1.5, 1.2, 0.5], .3, [1., .572, .184]),
+         add_esfera([0.75, 1.6, 0.5], .5, [0.5, .863, .184]),
+         add_esfera([1.5, .15, 0.5], .1, [0.321, 0., .864]),
+         add_esfera([0.75, .1, 1.5], .2, [0., 0., 1.]),
+         add_esfera([1.5, .5, 1.5], .4, [.5, .223, .5]),
+         add_esfera([-1.5, 1.1, 1.5], .5, [1., .572, .184]),
+         add_esfera([0., 1.9, 1.5], .2, [0.5, .863, .184]),
+         add_esfera([-.75, .1, 1.5], .3, [0.321, 0., .864]),
          add_plano([0., -.5, 0.], [0., 1., 0.]),
     ]
 
@@ -172,4 +182,4 @@ for i, x in enumerate(np.linspace(S[0], S[2], w)):
             reflection *= obj.get('reflection', 1.)
         img[h - j - 1, i, :] = np.clip(col, 0, 1)
 
-plt.imsave('raytracing2.png', img)
+plt.imsave('raytracing4.png', img)
