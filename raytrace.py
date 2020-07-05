@@ -58,6 +58,11 @@ def intersecao(O, D, obj):
     if obj['type'] == 'esfera':
         return intersecao_plano(O, D, obj['posicao'], obj['raio'])
 
+def normalizar(x) :
+    x /= np.linalg.norm(x)
+    return x
+    
+
 def get_normal(obj, ponto_intersec):
     # Precisa calcular a normal que varia de acordo com esfera ou plano
     
