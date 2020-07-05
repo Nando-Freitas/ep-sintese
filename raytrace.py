@@ -22,7 +22,7 @@ def intersecao_esfera(O, D, S, R):
     # Bem parecido com o do plano, mas para esfera é um pouco mais simples porque da pra saber se há intersecao baseado no raio
     # Retorna a distancia do Objeto O ate a intersecao do raio (Objeto, Direcao) com a esfera (Esfera S, Raio), ou mais infinito se nao ha intersecao
     # Objeto e Esfera S sao pontos 3D, Direcao eh um vetor normalizado, Raio R é um escalar
-    # https://stackoverflow.com/questions/13783330/ray-tracing-cone-the-discriminant-gives-ve-values-so-no-intersections
+    # https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection
     # a = raio * raio
     # Precisa usar o dot porque sao vetores
     a = np.dot(D, D)
@@ -53,7 +53,10 @@ def intersecao_esfera(O, D, S, R):
 
 def intersecao(O, D, obj):
     # Precisa definir se a intersecao eh com plano ou com esfera
-
+    if obj['type'] == 'plano':
+        return intersecao_plano(O, D, obj['posicao'], obj['normal'])
+    if obj['type'] == 'esfera':
+        return intersecao_plano(O, D, obj['posicao'], obj['raio'])
 
 def get_normal(obj, ponto_intersec):
     # Precisa calcular a normal que varia de acordo com esfera ou plano
