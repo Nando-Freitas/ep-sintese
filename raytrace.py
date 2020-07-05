@@ -61,10 +61,15 @@ def intersecao(O, D, obj):
 def normalizar(x) :
     x /= np.linalg.norm(x)
     return x
-    
+
 
 def get_normal(obj, ponto_intersec):
     # Precisa calcular a normal que varia de acordo com esfera ou plano
+    if obj['type'] == 'esfera':
+        N = normalizar(ponto_intersec - obj['posicao'])
+    elif obj['type'] == 'plano':
+        N = obj['normal']
+    return N
     
 
 def get_color(obj, ponto_intersec):
