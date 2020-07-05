@@ -97,7 +97,7 @@ def tracar_raio(raioO, raioD):
   # Encontra as propriedades do objeto
   N = get_normal(obj, ponto_interseccao)
   color = get_color(obj, ponto_interseccao)
-  paraL = normalizar(L - ponto_interseccao)
+  paraL = normalizar(luz - ponto_interseccao)
   paraO = normalizar(O - ponto_interseccao)
   # Define se o objeto tem ou nao sombra
   sombra = [intersecao(ponto_interseccao + N * 0.0001, paraL, sombra_objeto) 
@@ -133,4 +133,8 @@ cena = [add_esfera([.0, .1, 1.], .6, [0., 0., 1.]),
          add_esfera([-1.5, .1, 3.5], .6, [1., .572, .184]),
          add_plano([0., -.5, 0.], [0., 1., 0.]),
     ]
+
+# Posicao da luz e cor
+luz = np.array([5., 5., -10.])
+cor_luz = np.ones(3)
 
