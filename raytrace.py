@@ -74,21 +74,48 @@ def get_normal(obj, ponto_intersec):
 
 def get_color(obj, ponto_intersec):
     # Retorna a cor que vai ser definida pelo usuario, provavalmente usando RGB
+    color = obj['color']
+    if not hasattr(color, '__len__'):
+        color = color(ponto_intersec)
+    return color
 
 
-def tracar_raio(rayO, rayD):
+def tracar_raio(raioO, raioD):
   # Encontra o primeiro ponto de interesao com a cena
+  inter = np.inf
+  for i, obj in enumerate(cena):
+      inter_obj = intersecao(raioO, raioD, obj)
+      if inter_obj < inter:
+          inter, indice_obj = inter_obj, i
   # Retorna None se o raio nao intercepta nenhum objeto
+  if inter == np.inf:
+      return
   # Encontra o objeto
+  obj = cena[indice_obj]
   # Encontra o ponto de intersecao com o objeto
+  ponto_interseccao = raioO + raioD * inter
   # Encontra as propriedades do objeto
+  N = get_normal(obj, ponto_interseccao)
+  color = get_color(obj, ponto_interseccao)
+  paraL = normalizar(L - ponto_interseccao)
+  paraO = normalizar(O - ponto_interseccao)
   # Define se o objeto tem ou nao sombra
-  # Entao precisa computar cor, shading (difusao) e a parte especular com Phong, provavelmente.
+  sombra = [intersecao(ponto_interseccao + N * 0.0001, paraL, sombra_objeto) 
+        for k, sombra_objeto in enumerate(cena) if k != indice_obj]
+  if sombra and min(sombra) < np.inf:
+      return 
+
+  # Entao precisa computar cor, 
+  cor_raio = ambiente
+  # shading (difusao) e a parte especular com Phong, provavelmente.
+  cor_raio = obj.get('especular_c', especular_c) * max(np.dot(N, normalizar(paraL + paraO)), 0) ** especular_k * cor_luz
+  return obj, ponto_interseccao, N, cor_raio  
 
 
 def add_esfera(posicao, raio, cor):
     # precisa retornar o dict da esfera
-
+    return dict(type='esfera', position=np.array(posicao), 
+        radius=np.array(raio), color=np.array(cor), reflection=.5)
 
 def add_plane(posicao, normal):
     # precisa retornar o dict do plano
