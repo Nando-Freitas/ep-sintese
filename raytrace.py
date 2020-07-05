@@ -115,10 +115,12 @@ def add_plano(position, normal):
     
 # Lista de objetos
 color_plane0 = 1. * np.ones(3)
-color_plane1 = 0. * np.ones(3)
-scene = [add_esfera([.0, .1, 1.], .6, [0., 0., 1.]),
-         add_esfera([-.75, .1, 2.25], .6, [.5, .223, .5]),
-         add_esfera([-1.5, .1, 3.5], .6, [1., .572, .184]),
+color_plane1 = 1. * np.ones(3)
+scene = [add_esfera([.0, .1, 1.], .2, [0., 0., 1.]),
+         add_esfera([-.75, .1, 2.25], .4, [.5, .223, .5]),
+         add_esfera([-1.5, .1, 1.], .6, [1., .572, .184]),
+         add_esfera([0.75, .1, 1.], .8, [0.5, .863, .184]),
+         add_esfera([1.5, 3, 3.], 1.0, [0.321, 0., .864]),
          add_plano([0., -.5, 0.], [0., 1., 0.]),
     ]
 
@@ -170,4 +172,4 @@ for i, x in enumerate(np.linspace(S[0], S[2], w)):
             reflection *= obj.get('reflection', 1.)
         img[h - j - 1, i, :] = np.clip(col, 0, 1)
 
-plt.imsave('raytracing.png', img)
+plt.imsave('raytracing2.png', img)
