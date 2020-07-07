@@ -69,7 +69,7 @@ def get_color(obj, M):
     return color
 
 def tracar_raio(rayO, rayD):
-    # Encontra o primeiro ponto de interesao com a cena
+    # Encontra o primeiro ponto de intersecao com a cena
     t = np.inf
     for i, obj in enumerate(scene):
         t_obj = intersecao(rayO, rayD, obj)
