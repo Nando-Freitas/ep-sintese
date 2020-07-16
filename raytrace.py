@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # A ideia eh fazer um raytracing bem simples, em python single thread mesmo usando esferas e um plano
+# Baseado em https://github.com/jamesbowman/raytrace/blob/master/rt3.py
 
 def phong(obj, N, toL, toO):
     # Calcula a parte especular usando Phong
