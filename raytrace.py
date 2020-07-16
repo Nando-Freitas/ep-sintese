@@ -17,6 +17,7 @@ def shading(obj, N, toL, color):
     return obj.get('diffuse_c', diffuse_c) * max(np.dot(N, toL), 0) * color
 
 def check_shadow(M, N, toL, obj_idx) :
+    # Baseado no código disponivel em https://gist.github.com/sklam/362c883eff73d297134c
     return [intersecao(M + N * .0001, toL, obj_sh) 
             for k, obj_sh in enumerate(scene) if k != obj_idx]
 
@@ -131,6 +132,7 @@ def intersecao_esfera(O, D, S, R):
 
 def intersecao(O, D, obj):
     # Precisa definir se a intersecao eh com plano ou com esfera
+    # Baseado no código disponivel em https://gist.github.com/sklam/362c883eff73d297134c
     if obj['type'] == 'plane':
         return intersecao_plano(O, D, obj['position'], obj['normal'])
     elif obj['type'] == 'sphere':
@@ -142,6 +144,7 @@ def normalizar(x):
 
 def get_normal(obj, M):
     # Precisa calcular a normal que varia de acordo com esfera ou plano
+    # Baseado no código disponivel em https://gist.github.com/sklam/362c883eff73d297134c
     if obj['type'] == 'sphere':
         N = normalizar(M - obj['position'])
     elif obj['type'] == 'plane':
@@ -158,11 +161,13 @@ def get_color(obj, M):
 
 def add_esfera(position, radius, color):
     # precisa retornar o dict da esfera
+    # Baseado no código disponivel em https://gist.github.com/sklam/362c883eff73d297134c
     return dict(type='sphere', position=np.array(position), 
         radius=np.array(radius), color=np.array(color), reflection=.5)
     
 def add_plano(position, normal):
     # precisa retornar o dict do plano
+    # Baseado no código disponivel em https://gist.github.com/sklam/362c883eff73d297134c
     return dict(type='plane', position=np.array(position), 
         normal=np.array(normal),
         color=lambda M: (color_plane0 
@@ -214,6 +219,7 @@ h = 400
 img = np.zeros((h, w, 3))
 
 r = float(w) / h
+# Baseado no código disponivel em https://gist.github.com/sklam/362c883eff73d297134c
 # Coordenadas da tela: x0, y0, x1, y1.
 screen = (-1., -1. / r + .25, 1., 1. / r + .25)
 
@@ -243,6 +249,7 @@ for i, x in enumerate(np.linspace(screen[0], screen[2], w)):
     if i % 10 == 0:
         print ((i / float(w) * 100), "%")
     for j, y in enumerate(np.linspace(screen[1], screen[3], h)):
+        # Baseado no código disponivel em https://gist.github.com/sklam/362c883eff73d297134c
         Q[:2] = (x, y)
         col[:], reflection, rayO, rayD = initialize_loop(0, 1., Q, O)
         depth = 0 # Profundidade inicial
