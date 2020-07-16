@@ -35,6 +35,7 @@ def check_properties(rayO, rayD, obj, t):
 
 
 def compute_color(obj, N, toL, toO, color):
+    # Baseado em https://github.com/jamesbowman/raytrace/blob/master/rt3.py
     col_ray = ambient
     col_ray += shading(obj, N, toL, color)
     col_ray += phong(obj, N, toL, toO)
@@ -43,6 +44,7 @@ def compute_color(obj, N, toL, toO, color):
 
 def tracar_raio(rayO, rayD):
     # Encontra o primeiro ponto de intersecao com a cena
+    # Baseado em https://github.com/jamesbowman/raytrace/blob/master/rt3.py
     t = np.inf
     for i, obj in enumerate(scene):
         t_obj = intersecao(rayO, rayD, obj)
@@ -134,6 +136,8 @@ def intersecao_esfera(O, D, S, R):
 def intersecao(O, D, obj):
     # Precisa definir se a intersecao eh com plano ou com esfera
     # Baseado no código disponivel em https://gist.github.com/sklam/362c883eff73d297134c
+    # e https://stackoverflow.com/questions/45072283/how-to-use-a-python-dictionary
+
     if obj['type'] == 'plane':
         return intersecao_plano(O, D, obj['position'], obj['normal'])
     elif obj['type'] == 'sphere':
@@ -146,6 +150,8 @@ def normalizar(x):
 def get_normal(obj, M):
     # Precisa calcular a normal que varia de acordo com esfera ou plano
     # Baseado no código disponivel em https://gist.github.com/sklam/362c883eff73d297134c
+    # e https://stackoverflow.com/questions/45072283/how-to-use-a-python-dictionary
+
     if obj['type'] == 'sphere':
         N = normalizar(M - obj['position'])
     elif obj['type'] == 'plane':
@@ -162,12 +168,14 @@ def get_color(obj, M):
 
 def add_esfera(position, radius, color):
     # precisa retornar o dict da esfera
+    # Baseado em https://github.com/jamesbowman/raytrace/blob/master/rt3.py
     # Baseado no código disponivel em https://gist.github.com/sklam/362c883eff73d297134c
     return dict(type='sphere', position=np.array(position), 
         radius=np.array(radius), color=np.array(color), reflection=.5)
     
 def add_plano(position, normal):
     # precisa retornar o dict do plano
+    # Baseado em https://github.com/jamesbowman/raytrace/blob/master/rt3.py
     # Baseado no código disponivel em https://gist.github.com/sklam/362c883eff73d297134c
     return dict(type='plane', position=np.array(position), 
         normal=np.array(normal),
@@ -203,6 +211,7 @@ def define_scene():
 
 
 def initialize_loop(color = 0, reflection = 1., Q = None, O = None):
+    # Baseado em https://github.com/jamesbowman/raytrace/blob/master/rt3.py
     D = normalizar(Q - O)
     return color, reflection, O, D  
 
